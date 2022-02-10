@@ -93,7 +93,7 @@ $(document).ready( function () {
 		  
 		 $.ajax({
 			type: 'POST',
-			url: "https://cosasbochi.ddns.net:8081/post",
+			url: "https://elclientenotienelarazon.com:8081/post",
 			contentType: "application/json",
 			data:JSON.stringify({"url":url}),
 		      success: function(data) {
@@ -147,7 +147,7 @@ $(document).ready( function () {
 			$('#tablaBuscar').show(500);
 			 $.ajax({
 				type: 'POST',
-				url: "https://cosasbochi.ddns.net:8081/buscarKeyword",
+				url: "https://elclientenotienelarazon.com:8081/buscarKeyword",
 				contentType: "application/json",
 				data: JSON.stringify({"url":url}),
 			      success: function(data) {
