@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scarping</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js">
+	
+</script>
+
+
+<style>
+#cajaTablaKeyword{
+	height:300px;
+	overflow-y: scroll;
+}
+#tablaBuscar{
+	height:300px;
+	overflow-y: scroll;
+	
+}
+
+.preloader {
+  width: 70px;
+  height: 70px;
+  border: 10px solid #eee;
+  border-top: 10px solid #666;
+  border-radius: 50%;
+  animation-name: girar;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="row"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<h4>URL</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+
+				<div class="form-group ml-4">
+					<label for="url" class="text-muted">Escribe la url</label> <input
+						id="url" class="form-control" type="url">
+				</div>
+
+				<div class="form-group d-flex justify-content-center">
+					<button class="btn btn-primary" id="boton">Comprobar</button>
+				</div>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center">
+			<div class="preloader" style="display: none">
+				<!-- Circulo de Carga -->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<h4 style="display: none" id="til1">Título</h4>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center">
+			<p class="text-muted" id="parrafoTitulo">El título de la página
+				web es: &nbsp;</p>
+			<a id="titulo" class="text-success"></a>
+		</div>
+		<div class="row mt-4">
+			<div class="col-12">
+				<h4 style="display: none" id="til2">Etiqueta Meta</h4>
+			</div>
+		</div>
+		<div class="row">
+			<ul id="listaMeta" style="list-style: none; display: none">
+			</ul>
+		</div>
+
+		<div class="row mt-4">
+			<div class="col-6">
+				<h4 style="display: none" id="til3">Href</h4>
+			</div>
+			<div class="col-6" id="tilUrl" style="display: none">
+				<div class="row">
+					<strong><p class="text-success">
+							Número de enlaces FOLLOW: &nbsp;<a id="numFollow"></a>
+						</p></strong>
+				</div>
+				<div class="row ml-4">
+					<strong><p class="text-muted ">
+							Número de enlaces FOLLOW fuera de mi web: &nbsp;<a
+								id="numFollowOut"></a>
+						</p></strong>
+				</div>
+				<div class="row">
+					<strong><p class="text-warning">
+							Número de enlaces NO FOLLOW: &nbsp;<a id="numNoFollow"></a>
+						</p></strong>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<ul id="listaHref" style="list-style: none; display: none">
+			</ul>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<h4 style="display: none" id="til4">Href Follow fuera de mi web</h4>
+			</div>
+		</div>
+		<div class="row">
+			<ul id="listaHrefNoFollow" style="list-style: none; display: none"></ul>
+		</div>
+		<div class="row mb-5" id="tilKeyword" style="display: none">
+			<div class="col-6">
+				<h4>Keyword</h4>
+			</div>
+			<div class="col-6">
+				<strong><p>
+						El número de palabras en la web es: &nbsp;<a id="numPalabras"></a>
+					</p></strong>
+			</div>
+		</div>
+		<div class="row" id="keyword" style="display: none">
+			<div class="col-6">
+				<div id="cajaTablaKeyword">
+					<table class="table" id="tablaKeyword">
+						<thead>
+							<tr>
+								<th>Keyword</th>
+								<th>Número</th>
+							</tr>
+						</thead>
+						<tbody id="filasKeyword">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-6">
+				<div class="row d-flex justify-content-center mb-3">
+					<h3>Busca la Keyword</h3>
+				</div>
+				<div class="row d-flex justify-content-center mb-3">
+					<input id="buscarKeyword" type="text">
+				</div>
+				<div class="row d-flex justify-content-center mb-3">
+					<button id="botonKeyword" class="btn btn-success">Buscar
+						keyword</button>
+				</div>
+		
+
+				<div class="row" style="display: none" id="tablaBuscar">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Keyword</th>
+								<th>Número</th>
+							</tr>
+						</thead>
+						<tbody id="salidaBuscadorKeyword">
+
+						</tbody>
+					</table>
+				</div>
+
+				
+				<div class="row d-flex justify-content-center">
+					<button class="btn btn-warning" id="botonLimpiarKeyword" style="display:none">Limpiar Keyword</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row pt-4 pb-4">
+			<div class="col-12">
+				<div class="row">
+					<h5 class="text-muted">Desarrollado por:</h5>
+				</div>
+				<div class="row d-flex justify-content-center">
+					<a href="https://rosasdecolores.com" class="text-danger">Rosas
+						de Colores</a>
+				</div>
+				<div class="row d-flez justify-content-center">
+					<a href="https://elclientenotienelarazon.com" class="text-info">El
+						cliente no tiene la razón</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="jquery/index.js">
+		
+	</script>
+</body>
+</html>
